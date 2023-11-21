@@ -1779,7 +1779,7 @@ app.listen(process.env.PORT || 3000, function(){
 });
 */
 
-
+/*
 const express=require('express');
 
 const app=express()
@@ -1794,6 +1794,18 @@ const port = config.get('port');
 const databaseUrl = config.get('database.url');
 
 Mongoose.connect(databaseUrl)
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
+*/
+
+
+const express = require('express');
+const app = express();
+app.get('/', (req, res) => {
+  res.send('hello world')
+});
+module.exports = app;// Export the app for testing
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
