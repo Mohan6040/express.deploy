@@ -1762,7 +1762,21 @@ module.exports = app;
 */
 
 /*
+const express=require('express');
 
+const app=express()
+
+
+require('dotenv').config()
+
+const port = process.env.PORT || 3000;
+const nodeEnv = process.env.NODE_ENV || 'development';
+const databaseUrl = process.env.DATABASE_URL;
+
+Mongoose.connect(databaseUrl)
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 */
 
 
@@ -1770,11 +1784,16 @@ const express=require('express');
 
 const app=express()
 
-app.get('/',(req,res)=>{
-  res.send('Hello World')
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
-})
+require('dotenv').config()
 
+const config = require('config');
+const port = config.get('port');
+const databaseUrl = config.get('database.url');
+
+Mongoose.connect(databaseUrl)
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
